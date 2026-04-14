@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowBigUp, ArrowBigDown, ExternalLink, MessageSquare } from 'lucide-react';
 import { getYoutubeThumbnail, fetchPlaylistThumbnail } from '../utils/youtubeViewer';
 import './ResourceCard.css';
 
 const ResourceCard = ({ resource, viewMode, onUpvote, onDownvote }) => {
   const [thumbnailUrl, setThumbnailUrl] = useState(resource.thumbnail || null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!resource.thumbnail && resource.url) {
@@ -26,13 +28,24 @@ const ResourceCard = ({ resource, viewMode, onUpvote, onDownvote }) => {
         : null
   );
 
+  const handleVote = (e, type) => {
+    e.preventDefault();
+    if (!localStorage.getItem('token')) {
+      alert("Please login first to upvote or downvote resources.");
+      navigate('/login');
+      return;
+    }
+    if (type === 'up') onUpvote(resource.id);
+    else onDownvote(resource.id);
+  };
+
   return (
     <div className={`resource-card glass-panel ${viewMode === 'grid' ? 'grid-mode' : ''}`}>
       {/* Voting Sidebar */}
       <div className="vote-sidebar">
         <button 
           className={`btn vote-btn ${resource.userVote === 1 ? 'upvoted' : ''}`}
-          onClick={() => onUpvote(resource.id)}
+          onClick={(e) => handleVote(e, 'up')}
         >
           <ArrowBigUp size={24} />
         </button>
@@ -41,7 +54,7 @@ const ResourceCard = ({ resource, viewMode, onUpvote, onDownvote }) => {
         </span>
         <button 
           className={`btn vote-btn ${resource.userVote === -1 ? 'downvoted' : ''}`}
-          onClick={() => onDownvote(resource.id)}
+          onClick={(e) => handleVote(e, 'down')}
         >
           <ArrowBigDown size={24} />
         </button>
