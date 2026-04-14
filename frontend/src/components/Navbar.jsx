@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ChevronDown, Code, BrainCircuit, Blocks, Hexagon, Moon, Sun, Search, LogIn, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { ChevronDown, Code, BrainCircuit, Blocks, Hexagon, Moon, Sun, Search, LogIn, ExternalLink, LogOut } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = ({ theme, toggleTheme, searchQuery, setSearchQuery, matchingResources = [] }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem('token'));
+  }, [location]);
 
   const navItems = [
     {
@@ -161,10 +167,17 @@ const Navbar = ({ theme, toggleTheme, searchQuery, setSearchQuery, matchingResou
             <span>roadmap.sh</span>
           </button>
           <div style={{ width: '1px', background: 'var(--border)', margin: '0 0.5rem' }}></div>
-          <button className="btn" onClick={() => handleNavigate('/login')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--accent)', color: '#0d1117', padding: '0.4rem 1.2rem', borderRadius: '8px', fontWeight: '600' }}>
-            <LogIn size={16} />
-            <span>Login</span>
-          </button>
+          {isLoggedIn ? (
+            <button className="btn" onClick={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); setIsLoggedIn(false); navigate('/'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface-hover)', borderRadius: '8px', padding: '0.4rem 1.2rem', fontWeight: '600' }}>
+              <LogOut size={16} />
+              <span>Logout</span>
+            </button>
+          ) : (
+            <button className="btn" onClick={() => handleNavigate('/login')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--accent)', color: '#0d1117', padding: '0.4rem 1.2rem', borderRadius: '8px', fontWeight: '600' }}>
+              <LogIn size={16} />
+              <span>Login</span>
+            </button>
+          )}
           <button className="btn nav-item" onClick={toggleTheme} aria-label="Toggle theme">
             {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
           </button>

@@ -1,11 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 // Load environment variables from the custom file
 dotenv.config({ path: './mongo.env' });
 
+const authRoutes = require('./routes/auth');
+
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
@@ -28,3 +32,5 @@ mongoose.connect(MONGO_URI)
 app.get('/', (req, res) => {
     res.send('Backend API is running.');
 });
+
+app.use('/api/auth', authRoutes);
