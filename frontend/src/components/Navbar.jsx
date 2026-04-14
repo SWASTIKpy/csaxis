@@ -11,41 +11,57 @@ const Navbar = ({ theme, toggleTheme, searchQuery, setSearchQuery, matchingResou
     {
       title: 'DSA',
       icon: <Blocks size={18} />,
-      value: 'dsa-all',
+      groups: [
+        {
+          heading: 'Resources',
+          links: [
+            { label: 'DSA ALL', value: 'dsa-all' },
+            { label: 'C++', value: 'dsa-cpp' },
+            { label: 'Python', value: 'dsa-python' },
+            { label: 'Java', value: 'dsa-java' },
+          ]
+        }
+      ]
     },
     {
       title: 'DEV',
       icon: <Code size={18} />,
       groups: [
         {
-          heading: 'Web Dev',
+          heading: 'Engineering',
           links: [
-            { label: 'Frontend', value: 'dev-web-frontend' },
-            { label: 'Backend', value: 'dev-web-backend' },
+            { label: 'DEV ALL', value: 'dev-all' },
+            { label: 'Web Dev', value: 'dev-web' },
+            { label: 'System Design', value: 'system-design' },
           ],
         },
         {
           heading: 'AIML',
           links: [
-            { label: 'ML', value: 'dev-aiml-ml' },
-            { label: 'GenAI', value: 'dev-aiml-genai' },
-            { label: 'DL', value: 'dev-aiml-dl' },
-            { label: 'RL', value: 'dev-aiml-rl' },
-          ],
-        },
-        {
-          heading: 'Basics',
-          links: [
-            { label: 'CS50', value: 'dev-basics-cs50' },
-            { label: 'One shots ', value: 'dev-basics-python' },
+            { label: 'Machine Learning', value: 'dev-aiml-ml' },
+            { label: 'Deep Learning', value: 'dev-aiml-dl' },
           ],
         },
       ],
     },
     {
-      title: 'GATE',
+      title: 'Core CS / GATE',
       icon: <BrainCircuit size={18} />,
-      value: 'gate-general',
+      groups: [
+        {
+          heading: 'Core CS',
+          links: [
+            { label: 'Fundamentals', value: 'core-cs' },
+            { label: 'Basics (CS50)', value: 'dev-basics-cs50' },
+          ]
+        },
+        {
+          heading: 'GATE',
+          links: [
+            { label: 'GATE General', value: 'gate-general' },
+          ]
+        }
+      ]
     },
   ];
 
@@ -75,8 +91,8 @@ const Navbar = ({ theme, toggleTheme, searchQuery, setSearchQuery, matchingResou
           {searchQuery && matchingResources.length > 0 && (
             <div className="search-dropdown glass-panel">
               {matchingResources.slice(0, 5).map(res => (
-                <div 
-                  key={res.id} 
+                <div
+                  key={res.id}
                   className="search-result-item"
                   onClick={() => {
                     setSearchQuery('');
@@ -104,7 +120,7 @@ const Navbar = ({ theme, toggleTheme, searchQuery, setSearchQuery, matchingResou
               onMouseEnter={() => !item.value && setActiveDropdown(index)}
               onMouseLeave={() => !item.value && setActiveDropdown(null)}
             >
-              <button 
+              <button
                 className="btn nav-item"
                 onClick={() => item.value ? handleNavigate(`/roadmap/${item.value}`) : null}
               >

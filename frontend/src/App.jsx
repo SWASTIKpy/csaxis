@@ -25,26 +25,6 @@ function App() {
   // Extended mock state for resources (6 items)
   const [resources, setResources] = useState([
     {
-      id: 1,
-      title: 'CS50 2023 - Lecture 0 - Scratch',
-      url: 'https://www.youtube.com/watch?v=8mAITcNt710',
-      tag: 'DEV-BASICS-CS50', // updating tags to match routing structur
-      timeAgo: '2 hours ago',
-      votes: 145,
-      comments: 32,
-      userVote: 0
-    },
-    {
-      id: 2,
-      title: 'Striver - Trees all in one',
-      url: 'https://www.youtube.com/watch?v=_PnFzKNrX0A',
-      tag: 'dsa-all',
-      timeAgo: '5 hours ago',
-      votes: 89,
-      comments: 14,
-      userVote: 0
-    },
-    {
       id: 3,
       title: 'Stanford CS229: Machine Learning Course',
       url: 'https://www.youtube.com/watch?v=jGwO_UgTS7I',
@@ -54,56 +34,7 @@ function App() {
       comments: 102,
       userVote: 0
     },
-    {
-      id: 4,
-      title: 'GATE CS 2024 Strategy & Roadmap',
-      url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-      tag: 'gate-general',
-      timeAgo: '3 days ago',
-      votes: 42,
-      comments: 5,
-      userVote: 0
-    },
-    {
-      id: 5,
-      title: 'Two Pointers Concept in 10 Minutes',
-      url: 'https://www.youtube.com/watch?v=-Eqf5MB_OkE',
-      tag: 'dsa-twopointer',
-      timeAgo: '1 hour ago',
-      votes: 215,
-      comments: 18,
-      userVote: 0
-    },
-    {
-      id: 6,
-      title: 'Django Setup - Full Backend Tutorial',
-      url: 'https://www.youtube.com/watch?v=rHux0gMZ3Eg',
-      tag: 'dev-web-backend',
-      timeAgo: '4 hours ago',
-      votes: 112,
-      comments: 8,
-      userVote: 0
-    },
-    {
-      id: 7,
-      title: 'Valid Parentheses - Stack - Leetcode 20',
-      url: 'https://www.youtube.com/watch?v=WTzjTskDFMg',
-      tag: 'dsa-stack',
-      timeAgo: '6 hours ago',
-      votes: 382,
-      comments: 42,
-      userVote: 0
-    },
-    {
-      id: 8,
-      title: 'React Navigation & Routing Complete Guide',
-      url: 'https://www.youtube.com/watch?v=SMHOcgglW4c',
-      tag: 'dev-web-frontend',
-      timeAgo: '1 day ago',
-      votes: 521,
-      comments: 65,
-      userVote: 0
-    },
+
     {
       id: 9,
       title: 'Deep Learning Specialization - Andrew Ng',
@@ -113,7 +44,31 @@ function App() {
       votes: 890,
       comments: 115,
       userVote: 0
-    }
+    },
+    { id: 10, title: 'AI/ML Playlist 1', url: 'https://youtube.com/playlist?list=PLKnIA16_RmvZ41tjbKB2ZnwchfniNsMuQ', tag: 'dev-aiml-ml', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 11, title: 'AI/ML Playlist 2', url: 'https://youtube.com/playlist?list=PLKnIA16_Rmvboy8bmDCjwNHgTaYH2puK7', tag: 'dev-aiml-ml', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 12, title: 'AI/ML Playlist 3', url: 'https://youtube.com/playlist?list=PLKnIA16_RmvZo7fp5kkIth6nRTeQQsjfX', tag: 'dev-aiml-ml', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 13, title: 'AI/ML Playlist 4', url: 'https://youtube.com/playlist?list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH', tag: 'dev-aiml-ml', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 14, title: 'System Design Course', url: 'https://youtube.com/playlist?list=PLQEaRBV9gAFvzp6XhcNFpk1WdOcyVo9qT', tag: 'system-design', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 15, title: 'DSA C++ Course', url: 'https://youtube.com/playlist?list=PLQEaRBV9gAFvzp6XhcNFpk1WdOcyVo9qT', tag: 'dsa-cpp', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 16, title: 'Striver\'s A2Z DSA Sheet', url: 'https://takeuforward.org/dsa/strivers-a2z-sheet-learn-dsa-a-to-z', tag: 'dsa-all', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 16, title: 'Python Neetcode', url: 'https://neetcode.com', tag: 'dsa-python', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 17, title: 'Python Playlist', url: 'https://youtube.com/playlist?list=PLu71SKxNbfoAMcPw8uJXxjeLwYQV8MkpQ', tag: 'dsa-python', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 18, title: 'DSA Java ', url: 'https://youtu.be/xwI5OBEnsZU', tag: 'dsa-java', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 19, title: 'CS50 playlist 1', url: 'https://youtube.com/playlist?list=PLhQjrBD2T380hlTqAU8HfvVepCcjCqTg6', tag: 'dev-basics-cs50', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 20, title: 'CS50 playlist 2', url: 'https://youtube.com/playlist?list=PLhQjrBD2T381PopUTYtMSstgk-hsTGkVm', tag: 'dev-basics-cs50', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 21, title: 'CS50 playlist 3', url: 'https://youtube.com/playlist?list=PLhQjrBD2T382v1MBjNOhPu9SiJ1fsD4C0', tag: 'dev-basics-cs50', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 22, title: 'CS50 playlist 4', url: 'https://youtube.com/playlist?list=PLhQjrBD2T3817j24-GogXmWqO5Q5vYy0V', tag: 'dev-basics-cs50', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 23, title: 'Web Dev Tutorial 1', url: 'https://youtu.be/3LRZRSIh_KE', tag: 'dev-web', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 24, title: 'Web Dev Tutorial 2', url: 'https://youtube.com/playlist?list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW', tag: 'dev-web', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 25, title: 'Web Dev Tutorial 3', url: 'https://youtube.com/playlist?list=PLu71SKxNbfoBkkr8lblqtsJvxrw3j1tWC', tag: 'dev-web', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 26, title: 'Web Dev Tutorial 4', url: 'https://youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37', tag: 'dev-web', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 27, title: 'Web Dev Tutorial 5', url: 'https://youtube.com/playlist?list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s', tag: 'dev-web', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 28, title: 'Core CS Subjects One Shot 1', url: 'https://youtu.be/IPvYjXCsTg8', tag: 'core-cs', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 29, title: 'Core CS Subjects One Shot 2', url: 'https://youtu.be/dl00fOOYLOM', tag: 'core-cs', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 30, title: 'Core CS Subjects One Shot 3', url: 'https://youtu.be/3obEP8eLsCw', tag: 'core-cs', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 31, title: 'GATE Resources Spreadsheet 1', url: 'https://docs.google.com/spreadsheets/u/0/d/1deRNsCI8WpGyEv7HbPUs65VEbeDTcUvZV4db1hB8gv8/htmlview', tag: 'gate-general', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 },
+    { id: 32, title: 'GATE Resources Spreadsheet 2', url: 'https://docs.google.com/spreadsheets/u/0/d/1VciaNd1WZc4MuAXHmipVunKoCWkDcCpWsM1M2MSrV0Y/htmlview', tag: 'gate-general', timeAgo: 'Just now', votes: 1, comments: 0, userVote: 0 }
   ]);
 
   const handleUpvote = (id) => {

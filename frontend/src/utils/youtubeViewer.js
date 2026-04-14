@@ -11,3 +11,20 @@ export function getYoutubeThumbnail(url) {
   }
   return null;
 }
+
+export async function fetchPlaylistThumbnail(url) {
+  if (!url || !url.includes('playlist?list=')) return null;
+  try {
+    const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(oembedUrl)}`;
+    const response = await fetch(proxyUrl);
+    const data = await response.json();
+    if (data && data.contents) {
+      const oembedData = JSON.parse(data.contents);
+      return oembedData.thumbnail_url || null;
+    }
+  } catch (error) {
+    console.error('Failed to fetch playlist thumbnail:', error);
+  }
+  return null;
+}

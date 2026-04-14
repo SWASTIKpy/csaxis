@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowBigUp, ArrowBigDown, ExternalLink, MessageSquare } from 'lucide-react';
-import { getYoutubeThumbnail } from '../utils/youtubeViewer';
+import { getYoutubeThumbnail, fetchPlaylistThumbnail } from '../utils/youtubeViewer';
 import './ResourceCard.css';
 
 const ResourceCard = ({ resource, viewMode, onUpvote, onDownvote }) => {
-  const thumbnailUrl = resource.thumbnail || getYoutubeThumbnail(resource.url);
+  const [thumbnailUrl, setThumbnailUrl] = useState(resource.thumbnail || null);
+
+  useEffect(() => {
+    if (!resource.thumbnail && resource.url) {
+      if (resource.url.includes('playlist?list=')) {
+        fetchPlaylistThumbnail(resource.url).then(url => {
+          if (url) setThumbnailUrl(url);
+        });
+      } else {
+        const url = getYoutubeThumbnail(resource.url);
+        if (url) setThumbnailUrl(url);
+      }
+    }
+  }, [resource.url, resource.thumbnail]);
+
+  // Use a custom aesthetic fallback if the thumbnail is null and it's a known youtube link
+  const displayThumbnail = thumbnailUrl || (
+      resource.url && resource.url.includes('youtube') 
+        ? '/fallback_thumbnail.png' 
+        : null
+  );
 
   return (
     <div className={`resource-card glass-panel ${viewMode === 'grid' ? 'grid-mode' : ''}`}>
@@ -37,10 +57,10 @@ const ResourceCard = ({ resource, viewMode, onUpvote, onDownvote }) => {
         <h3 className="resource-title">{resource.title}</h3>
 
         {/* Thumbnail Preview if applicable */}
-        {thumbnailUrl && (
+        {displayThumbnail && (
           <div className="resource-thumbnail">
             <a href={resource.url} target="_blank" rel="noopener noreferrer">
-              <img src={thumbnailUrl} alt="Resource thumbnail" />
+              <img src={displayThumbnail} alt="Resource thumbnail" />
             </a>
           </div>
         )}

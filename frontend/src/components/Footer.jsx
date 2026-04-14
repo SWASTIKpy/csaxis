@@ -10,7 +10,7 @@ const Footer = () => {
           &copy; {new Date().getFullYear()} CS Axis. All rights reserved.
         </p>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>
-          For submissions: <a href="mailto:your.email@example.com" style={{ color: 'var(--accent)', fontWeight: 'bold', textDecoration: 'none' }}>your.email@example.com</a>
+          For submissions: <a href="mailto:csaxis7@gmail.com" style={{ color: 'var(--accent)', fontWeight: 'bold', textDecoration: 'none' }}>csaxis7@gmail.com</a>
         </p>
       </div>
     </footer>
